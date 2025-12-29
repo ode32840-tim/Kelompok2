@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Export Absensi</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; shadow: 0 10px 25px rgba(0,0,0,0.1); width: 450px; border: 1px solid #ddd; }
+        .header { display: flex; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+        .icon { font-size: 30px; margin-right: 15px; }
+        h2 { margin: 0; color: #333; }
+        
+        .form-group { margin-bottom: 20px; display: grid; grid-template-columns: 140px 1fr; gap: 10px; }
+        label { font-weight: bold; color: #555; align-self: center; }
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+        
+        .hint { grid-column: 2; font-size: 11px; color: #888; margin-top: -15px; font-style: italic; }
+        
+        .btn-export { 
+            width: 100%; padding: 12px; background-color: white; border: 2px solid #333; 
+            color: #333; font-weight: bold; border-radius: 6px; cursor: pointer; 
+            transition: 0.3s; margin-top: 10px; font-size: 16px;
+        }
+        .btn-export:hover { background-color: #333; color: white; }
+
+        /* Sembunyikan form saat mode cetak/PDF */
+        @media print {
+            body { background: white; }
+            .btn-export, .hint { display: none; }
+            .card { border: none; shadow: none; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <span class="icon">📄</span>
+        <h2>Export Absensi</h2>
+    </div>
+
+    <form id="exportForm">
+        <div class="form-group">
+            <label>Nama Pegawai</label>
+            <input type="text" id="nama" placeholder="Nama Pegawai">
+        </div>
+        <div class="hint">*Kosongkan jika ingin menampilkan semua</div>
+
+        <div class="form-group">
+            <label>Tahun Absen</label>
+            <input type="number" id="tahun" value="2025">
+        </div>
+
+        <div class="form-group">
+            <label>Bulan Absen</label>
+            <select id="bulan">
+                <option value="Januari">Januari</option>
+                <option value="Februari">Februari</option>
+                <option value="Maret">Maret</option>
+                <option value="April">April</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Metode Export</label>
+            <select id="metode">
+                <option value="pdf">Files PDF</option>
+                <option value="csv">Excel / CSV</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="prosesExport()" class="btn-export">
+            💾 EXPORT 
+        </button>
+    </form>
+</div>
+
+<script>
+    function prosesExport() {
+        const nama = document.getElementById('nama').value || "Semua Pegawai";
+        const tahun = document.getElementById('tahun').value;
+        const bulan = document.getElementById('bulan').value;
+        const metode = document.getElementById('metode').value;
+
+        if (metode === 'pdf') {
+            // Simulasi export PDF menggunakan fungsi Print Browser
+            alert("Sistem akan membuka jendela cetak. Pilih 'Save as PDF' pada tujuan printer.");
+            window.print();
+        } else {
+            // Simulasi export CSV
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Nama,Tahun,Bulan\n";
+            csvContent += `${nama},${tahun},${bulan}\n`;
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Absensi_${nama}_${bulan}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            alert("File CSV Berhasil Diekspor!");
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cetak Absensi PAUD Amal Tododara</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tombol Print (Akan hilang saat dicetak) */
+        .btn-print {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-print:hover {
+            background-color: #218838;
+        }
+
+        /* Container Kertas (Ukuran A4) */
+        .print-area {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 20mm;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Elemen Desain */
+        .header-box {
+            border: 2px solid #000;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo {
+            width: 180px;
+            margin: 30px 0;
+        }
+
+        .school-name {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            text-align: left;
+            font-size: 22px;
+            line-height: 1.8;
+            margin-left: 10px;
+        }
+
+        .data-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 180px;
+        }
+
+        /* ATURAN KHUSUS PRINT */
+        @media print {
+            body { background: none; padding: 0; }
+            .btn-print { display: none; } /* Menghilangkan tombol saat di-print */
+            .print-area { 
+                box-shadow: none; 
+                border: none; 
+                width: 100%; 
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">
+        <span>🖨️</span> CETAK
+    </button>
+
+    <div class="print-area">
+        <div class="header-box">
+            <h1>Print Absensi</h1>
+        </div>
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_PAUD.svg/200px-Logo_PAUD.svg.png" alt="Logo PAUD" class="logo">
+
+        <div class="school-name">PAUD Amal Tododara TIKEP</div>
+
+        <div class="content">
+            <p>Dibawah Ini Merupakan Data Absensi Yang Telah Terdata:</p>
+            
+            <div><span class="data-label">Nama Pegawai</span>: Nurul A. Sagama</div>
+            <div><span class="data-label">Tanggal Absen</span>: Jumat, 7 November 2025</div>
+            <div><span class="data-label">Waktu Datang</span>: 12:46:28</div>
+        </div>
+    </div>
+
+</body>
+</html>
